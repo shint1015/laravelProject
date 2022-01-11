@@ -17,10 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 
 // Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/home', 'HomeController@index');
 
-// Route::get('get_youtube_data')
+Route::get('/get_youtube_data', "YoutubeController@index");
+
+
