@@ -28,9 +28,9 @@ class YoutubeController extends Controller
         }
 
         $view_arr = array($array);
-        
 
-        return 'aaaaaaa';
+
+        return view("youtube.index", $view_arr);
 
         
 
