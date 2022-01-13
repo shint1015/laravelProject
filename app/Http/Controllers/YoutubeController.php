@@ -9,11 +9,17 @@ class YoutubeController extends Controller
 {
     public function index()
     {
+        $search_word = $_GET["search_word"] ?? '';
 
-//        return 'aaaaa';
+        if($search_word != ""){
+            $search_word .= ' ';
+        }
+
+        $search_word .= '切り抜き　切抜き　切抜　short';
+
+
         $youtube_api = new CallYoutubeApi();
-//        return 'aaaaa';
-        $searchList = $youtube_api->searchList("ひろゆき");
+        $searchList = $youtube_api->searchList($search_word);
         $array = array();
         foreach($searchList as $rs){
             $videosList = $youtube_api->videosList($rs->id->videoId);
@@ -21,12 +27,14 @@ class YoutubeController extends Controller
             $array[] = array($embed, $videosList[0]['snippet'],$videosList[0]['statistics']);
         }
 
-        print("<pre>");
-        var_dump($array);
-        print("</pre>");
+        $view_arr = array($array);
+        
+
         return 'aaaaaaa';
+
+        
 
     }
 
-    // public function
+    // public function save_
 }

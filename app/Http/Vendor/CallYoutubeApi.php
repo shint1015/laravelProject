@@ -36,6 +36,7 @@ class CallYoutubeApi
         return $r->items;
     }
 
+
     /**
      * /v3/videosを呼び出す
      *
