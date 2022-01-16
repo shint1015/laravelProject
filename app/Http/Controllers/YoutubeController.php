@@ -15,7 +15,7 @@ class YoutubeController extends Controller
             $search_word .= ' ';
         }
 
-        $search_word .= '切り抜き　切抜き　切抜　short';
+        $search_word .= '切り抜き';
 
 
         $youtube_api = new CallYoutubeApi();
@@ -27,12 +27,14 @@ class YoutubeController extends Controller
             $array[] = array($embed, $videosList[0]['snippet'],$videosList[0]['statistics']);
         }
 
-        $view_arr = array($array);
+        $view_arr = array();
 
+        $view_arr["youtube_data"] = $array;
+//        var_dump($view_arr);
 
         return view("youtube.index", $view_arr);
 
-        
+
 
     }
 
