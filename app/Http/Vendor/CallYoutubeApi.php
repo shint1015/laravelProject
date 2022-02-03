@@ -15,6 +15,10 @@ class CallYoutubeApi
     {
         $this->key = env("YOUTUBE_DATA_API_KEY");
         $this->client = new Google_Client();
+        try {
+
+
+        }
         $this->client->setDeveloperKey($this->key);
         $this->youtube = new Google_Service_YouTube($this->client);
     }
@@ -27,28 +31,36 @@ class CallYoutubeApi
      */
     public function searchList(String $searchWord)
     {
-        $r = $this->youtube->search->listSearch('id', array(
-          'q' => $searchWord,
-          'maxResults' => 10,
-          'order' => 'viewCount',
-        ));
+        $array = array(
+            'q' => $searchWord,
+            'maxResults' => 10,
+            'order' => 'viewCount',
+        );
 
-        return $r->items;
+        try{
+            $rs = $this->youtube->search->listSearch('id', $array);
+        }catch (\Throwable $th){
+            return false;
+        }
+        return $rs->items;
     }
-
 
     /**
      * /v3/videosを呼び出す
-     *
-     * @param string $id
-     * @return array
+     * @param String $id
+     * @return false
      */
     public function videosList(String $id)
     {
-        $r = $this->youtube->videos->listVideos('statistics,snippet', array(
-          'id' => $id,
-        ));
+        $array = array(
+            'id' => $id,
+        );
 
-        return $r->items;
+        try {
+            $rs = $this->youtube->videos->listVideos('statistics,snippet', $array);
+        }catch (\Throwable $th){
+            return false;
+        }
+        return $rs->items;
     }
 }
