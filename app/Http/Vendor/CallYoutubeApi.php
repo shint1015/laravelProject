@@ -17,6 +17,7 @@ class CallYoutubeApi
         $this->client = new Google_Client();
         try {
 
+        }catch(\Throwable $th){
 
         }
         $this->client->setDeveloperKey($this->key);
